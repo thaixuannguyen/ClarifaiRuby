@@ -1,6 +1,13 @@
 module ClarifaiRuby
-  class RequestError < StandardError; end
-  
+  class RequestError < StandardError
+    attr_reader :code
+
+    def initialize(message, code)
+      super(message)
+      @code = code
+    end
+  end
+
   class Client
     include HTTMultiParty
     debug_output $stderr
