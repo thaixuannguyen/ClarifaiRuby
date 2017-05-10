@@ -2,7 +2,7 @@ module ClarifaiRuby
   class RequestError < StandardError
     attr_reader :code
 
-    def initialize(message, code)
+    def initialize(message, code = nil)
       super(message)
       @code = code
     end

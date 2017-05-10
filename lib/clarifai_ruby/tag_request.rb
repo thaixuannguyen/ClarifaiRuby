@@ -15,8 +15,9 @@ module ClarifaiRuby
 
       build_request!(body, opts)
 
-      @raw_response = @client.get(TAG_PATH, body).parsed_response
-      raise RequestError.new @raw_response["status_msg"] if @raw_response["status_code"] != "OK"
+      request = @client.get(TAG_PATH, body)
+      @raw_response = request.parsed_response
+      raise RequestError.new(@raw_response["status_msg"], request.response.code.to_i) if @raw_response["status_code"] != "OK"
 
       TagResponse.new(raw_response)
     end
